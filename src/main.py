@@ -2,6 +2,20 @@
 
 import re
 
+def count_rounds():
+    global current_round
+    current_round = 1
+    with open('result.txt', 'r') as input:
+        if not input.readline().strip():
+            return current_round
+        else:
+            while True:
+                for i in range(6):
+                    temp = input.readline()
+                current_round += 1
+                if not temp.strip():
+                    return current_round
+
 def initialize():
     global bidders_num
     global has_random_bidder
