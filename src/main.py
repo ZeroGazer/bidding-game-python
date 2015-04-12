@@ -2,6 +2,11 @@
 
 import re
 
+class Bidder:
+    def __init__(self, id, bid):
+        self.id = id
+        self.bid = bid
+
 def count_rounds():
     global current_round
     current_round = 1
