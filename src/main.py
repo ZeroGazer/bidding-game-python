@@ -34,7 +34,54 @@ def initialize():
             bids[i] = float(bids[i].split('/')[0]) / float(bids[i].split('/')[1])
         bids[i] = float(bids[i])
     bids.sort()
-       
+
+def read_previous_rounds():
+    global last_bidders
+    global last_last_bidders
+    last_bidders = []
+    last_last_bidders = []
+    with open('result.txt', 'r') as input:
+        if current_round == 2:
+            input_str = input.readline().strip()
+            input_str = input.readline().strip()
+            while not(input_str.startswith('end')):
+                if not(input_str == '-'):
+                    input_list = input_str.split(', ')
+                    if input_list[1] == '-':
+                        last_bidders.append(Bidder(input_list[0], 0))
+                    else:
+                        last_bidders.append(Bidder(input_list[0], float(input_list[1])))
+                    input_str = input.readline().strip()
+        else:
+            counter = 1
+            input_str = input.readline().strip()
+            while input_str and (counter != (current_round - 2)):
+                while not(input_str.startswith('end')):
+                    input_str = input.readline().strip()
+                input_str = input.readline().strip()
+                input_str = input.readline().strip()
+                counter += 1
+            input_str = input.readline().strip()
+            while not(input_str.startswith('end')):
+                if not(input_str == '-'):
+                    input_list = input_str.split(', ')
+                    if input_list[1] == '-':
+                        last_last_bidders.append(Bidder(input_list[0], 0))
+                    else:
+                        last_last_bidders.append(Bidder(input_list[0], float(input_list[1])))
+                input_str = input.readline().strip()
+            input_str = input.readline().strip()
+            input_str = input.readline().strip()
+            input_str = input.readline().strip()
+            while not(input_str.startswith('end')):
+                if not(input_str == '-'):
+                    input_list = input_str.split(', ')
+                    if input_list[1] == '-':
+                        last_bidders.append(Bidder(input_list[0], 0))
+                    else:
+                        last_bidders.append(Bidder(input_list[0], float(input_list[1])))
+                input_str = input.readline().strip()
+
 def main():
     initialize()
 
