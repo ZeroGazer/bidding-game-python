@@ -135,6 +135,8 @@ def bid():
                 print bids[0] + 0.1 * (bids[1] - bids [0])
             elif current_round == 2:
                 print min(find_highest_bid_except_given_name(last_bidders, my_name) + 0.05 * (bids[1] - bids [0]), 1)
+            elif (rounds != 0) and (rounds == current_round):
+                print bids[len(bids) - 1]
             else:
                 calculateBin()
                 calculateBEx()
@@ -166,6 +168,8 @@ def bid():
         else:
             if current_round == 1:
                 print min(bids)
+            elif (rounds != 0) and (rounds == current_round):
+                print bids[len(bids) - 1]
             else:
                 if is_input_allowable(find_highest_bid_except_given_name(last_bidders, my_name)) != -1:
                     if random.random() < 0.2:
@@ -175,7 +179,9 @@ def bid():
                 else:
                     print min(bids)
     else:
-        if not are_discrete_bids:
+        if (rounds != 0) and (rounds == current_round):
+                print bids[len(bids) - 1]
+        elif not are_discrete_bids:
             print random.uniform((bids[1] - bids[0]) / 2, bids[1])
         else:
             print bids[random.randint(len(bids) / 2, len(bids)) - 1]
