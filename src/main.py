@@ -52,8 +52,8 @@ def read_previous_rounds():
             while not(input_str.startswith('end')):
                 if not(input_str == '-'):
                     input_list = input_str.split(', ')
-                    if input_list[1] == '-':
-                        last_bidders.append(Bidder(input_list[0], 0))
+                    if input_list[1] == '-' or input_list[1] == '-1':
+                        last_bidders.append(Bidder(input_list[0], float(0)))
                     else:
                         last_bidders.append(Bidder(input_list[0], float(input_list[1])))
                     input_str = input.readline().strip()
@@ -70,8 +70,8 @@ def read_previous_rounds():
             while not(input_str.startswith('end')):
                 if not(input_str == '-'):
                     input_list = input_str.split(', ')
-                    if input_list[1] == '-':
-                        last_last_bidders.append(Bidder(input_list[0], 0))
+                    if input_list[1] == '-' or input_list[1] == '-1':
+                        last_last_bidders.append(Bidder(input_list[0], float(0)))
                     else:
                         last_last_bidders.append(Bidder(input_list[0], float(input_list[1])))
                 input_str = input.readline().strip()
@@ -81,8 +81,8 @@ def read_previous_rounds():
             while not(input_str.startswith('end')):
                 if not(input_str == '-'):
                     input_list = input_str.split(', ')
-                    if input_list[1] == '-':
-                        last_bidders.append(Bidder(input_list[0], 0))
+                    if input_list[1] == '-' or input_list[1] == '-1':
+                        last_bidders.append(Bidder(input_list[0], float(0)))
                     else:
                         last_bidders.append(Bidder(input_list[0], float(input_list[1])))
                 input_str = input.readline().strip()
