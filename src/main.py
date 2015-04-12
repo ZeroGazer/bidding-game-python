@@ -57,7 +57,7 @@ def read_previous_rounds():
                     else:
                         last_bidders.append(Bidder(input_list[0], float(input_list[1])))
                     input_str = input.readline().strip()
-        else:
+        elif current_round > 2:
             counter = 1
             input_str = input.readline().strip()
             while input_str and (counter != (current_round - 2)):
