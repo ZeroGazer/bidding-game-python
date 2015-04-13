@@ -205,9 +205,9 @@ def bid():
                         print bids[max(is_input_allowable(find_highest_bid_except_given_name(last_bidders, my_name)) - 1, len(bids) / 2)]
                 else:
                     if not has_random_bidder:
-                        print find_highest_bid_except_given_name(last_bidders, my_name)
+                        print fbids[min(is_input_allowable(find_highest_bid_except_given_name(last_bidders, my_name)), len(bids) - 1)]
                     else:
-                        print max(find_highest_bid_except_given_name(last_bidders, my_name), bids[len(bids) / 2])
+                        print bids[max(min(is_input_allowable(find_highest_bid_except_given_name(last_bidders, my_name)), len(bids) - 1), len(bids) / 2)]
             else:
                 if not has_random_bidder:
                     print min(bids)
