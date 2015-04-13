@@ -66,7 +66,7 @@ def initialize():
     global all_bids_are_announced
     global are_discrete_bids
     global bids
-    with open('setup.txt', 'r') as input:
+    with open('setup.txt', 'r') as input: # Set up the game
         bidders_num = input.readline().strip()
         has_random_bidder = (input.readline().strip() == '1')
         rounds = input.readline().strip()
@@ -86,7 +86,7 @@ def read_previous_rounds():
     last_bidders = []
     last_last_bidders = []
     with open('result.txt', 'r') as input:
-        if current_round == 2:
+        if current_round == 2: # Read last round data
             input_str = input.readline().strip()
             input_str = input.readline().strip()
             while not(input_str.startswith('end')):
@@ -97,7 +97,7 @@ def read_previous_rounds():
                     else:
                         last_bidders.append(Bidder(input_list[0], float(input_list[1])))
                     input_str = input.readline().strip()
-        elif current_round > 2:
+        elif current_round > 2: # Read last two rounds data
             counter = 1
             input_str = input.readline().strip()
             while input_str and (counter != (current_round - 2)):
@@ -129,20 +129,20 @@ def read_previous_rounds():
 
 def bid():
     my_name = os.path.basename(__file__)[:len(os.path.basename(__file__)) - 3]
-    if not are_discrete_bids:
-        if current_round == 1:
+    if not are_discrete_bids: # Continuous bids
+        if current_round == 1: # First round
             if not has_random_bidder:
                 print bids[0] + 0.1 * (bids[1] - bids [0])
             else:
                 print (bids[1] - bids[0]) / 2 + 0.1 * (bids[1] - bids [0])
-        elif current_round == 2:
+        elif current_round == 2: # Second round
             if not has_random_bidder:
                 print min(find_highest_bid_except_given_name(last_bidders, my_name) + 0.05 * (bids[1] - bids [0]), bids[1])
             else:
                 print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + 0.05 * (bids[1] - bids [0]), bids[1]), (bids[1] - bids[0]) / 2)
-        elif (rounds != 0) and (rounds == current_round):
+        elif (rounds != 0) and (rounds == current_round): # Last round
             print bids[len(bids) - 1]
-        else:
+        else: # Third round to the round before the last round
             calculateBin()
             calculateBEx()
             max_bIn = -sys.maxint - 1
@@ -154,13 +154,13 @@ def bid():
                 if bidder.bEx > max_bEx:
                     max_bEx = bidder.bEx
             max_b = max(max_bIn, max_bEx)
-            if random.random() < 0.2:
+            if random.random() < 0.2: # Forgive with probability of 0.2
                 if all_bids_are_announced:
                     if not has_random_bidder:
                         print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b - 0.2 * (bids[1] - bids [0]), bids[1]), bids[0])
                     else:
                         print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b - 0.2 * (bids[1] - bids [0]), bids[1]), (bids[1] - bids[0]) / 2)
-                else:
+                else: # 
                     if last_bidders[0].id == my_name:
                         if not has_random_bidder:
                             print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), bids[1]), bids[0])
@@ -171,7 +171,7 @@ def bid():
                             print find_highest_bid(last_bidders)
                         else:
                             print min(find_highest_bid(last_bidders), (bids[1] - bids[0]) / 2)
-            else:
+            else: 
                 if all_bids_are_announced:
                     if not has_random_bidder:
                         print min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), bids[1])
@@ -188,17 +188,17 @@ def bid():
                             print find_highest_bid(last_bidders)
                         else:
                             print min(find_highest_bid(last_bidders), (bids[1] - bids[0]) / 2)
-    else:
-        if current_round == 1:
+    else: # Discrete bids
+        if current_round == 1: # First round
             if not has_random_bidder:
                 print min(bids)
             else:
                 print bids[len(bids) / 2]
-        elif (rounds != 0) and (rounds == current_round):
+        elif (rounds != 0) and (rounds == current_round): # Last round
             print bids[len(bids) - 1]
-        else:
+        else: # Second round to the round before last round
             if is_input_allowable(find_highest_bid_except_given_name(last_bidders, my_name)) != -1:
-                if random.random() < 0.2:
+                if random.random() < 0.2: # Forgive with probability of 0.2
                     if not has_random_bidder:
                         print bids[max(is_input_allowable(find_highest_bid_except_given_name(last_bidders, my_name)) - 1, 0)]
                     else:
@@ -208,7 +208,7 @@ def bid():
                         print bids[min(is_input_allowable(find_highest_bid_except_given_name(last_bidders, my_name)), len(bids) - 1)]
                     else:
                         print bids[max(min(is_input_allowable(find_highest_bid_except_given_name(last_bidders, my_name)), len(bids) - 1), len(bids) / 2)]
-            else:
+            else: # No valid bids in last round
                 if not has_random_bidder:
                     print min(bids)
                 else:
