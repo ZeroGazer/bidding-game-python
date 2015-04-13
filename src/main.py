@@ -137,9 +137,9 @@ def bid():
                 print (bids[1] - bids[0]) / 2 + 0.1 * (bids[1] - bids [0])
         elif current_round == 2:
             if not has_random_bidder:
-                print min(find_highest_bid_except_given_name(last_bidders, my_name) + 0.05 * (bids[1] - bids [0]), 1)
+                print min(find_highest_bid_except_given_name(last_bidders, my_name) + 0.05 * (bids[1] - bids [0]), bids[1])
             else:
-                print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + 0.05 * (bids[1] - bids [0]), 1), 0.5)
+                print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + 0.05 * (bids[1] - bids [0]), bids[1]), (bids[1] - bids[0]) / 2)
         elif (rounds != 0) and (rounds == current_round):
             print bids[len(bids) - 1]
         else:
@@ -157,37 +157,37 @@ def bid():
             if random.random() < 0.2:
                 if all_bids_are_announced:
                     if not has_random_bidder:
-                        print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b - 0.2 * (bids[1] - bids [0]), 1), 0)
+                        print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b - 0.2 * (bids[1] - bids [0]), bids[1]), bids[0])
                     else:
-                        print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b - 0.2 * (bids[1] - bids [0]), 1), 0.5)
+                        print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b - 0.2 * (bids[1] - bids [0]), bids[1]), (bids[1] - bids[0]) / 2)
                 else:
                     if last_bidders[0].id == my_name:
                         if not has_random_bidder:
-                            print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), 1), 0)
+                            print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), bids[1]), bids[0])
                         else:
-                            print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), 1), 0.5)
+                            print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), bids[1]), (bids[1] - bids[0]) / 2)
                     else:
                         if not has_random_bidder:
                             print find_highest_bid(last_bidders)
                         else:
-                            print min(find_highest_bid(last_bidders), 0.5)
+                            print min(find_highest_bid(last_bidders), (bids[1] - bids[0]) / 2)
             else:
                 if all_bids_are_announced:
                     if not has_random_bidder:
-                        print min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), 1)
+                        print min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), bids[1])
                     else:
-                        print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), 1), 0.5)
+                        print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), bids[1]), (bids[1] - bids[0]) / 2)
                 else:
                     if last_bidders[0].id == my_name:
                         if not has_random_bidder:
-                            print min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), 1)
+                            print min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), bids[1])
                         else:
-                            print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), 1), 0.5)
+                            print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), bids[1]), (bids[1] - bids[0]) / 2)
                     else:
                         if not has_random_bidder:
                             print find_highest_bid(last_bidders)
                         else:
-                            print min(find_highest_bid(last_bidders), 0.5)
+                            print min(find_highest_bid(last_bidders), (bids[1] - bids[0]) / 2)
     else:
         if current_round == 1:
             if not has_random_bidder:
