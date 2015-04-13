@@ -178,7 +178,7 @@ def bid():
                     else:
                         print max(min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), bids[1]), (bids[1] - bids[0]) / 2)
                 else:
-                    if last_bidders[0].id == my_name:
+                    if last_bidders[0].id != my_name:
                         if not has_random_bidder:
                             print min(find_highest_bid_except_given_name(last_bidders, my_name) + max_b + 0.05 * (bids[1] - bids [0]), bids[1])
                         else:
