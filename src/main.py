@@ -26,7 +26,7 @@ def find_highest_bid_except_given_name(bidders, name):
     if len(bidders) == 0:
         return 0.0
     if len(bidders) == 1:
-        return bidder.bid
+        return bidders[0].bid
     else:
         max_bid = -sys.maxint - 1
         for bidder in bidders:
